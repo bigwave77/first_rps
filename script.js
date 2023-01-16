@@ -3,20 +3,18 @@ function randomIntFromInterval(min, max) { // min and max included
   }
 
 
-function getComputerChoice() {
-    switch (rndInt) {
+function getComputerChoice(number) {
+    switch (number) {
         case 1:
-            return "Rock";
+            return "rock";
         case 2:
-            return "Paper";
+            return "paper";
         case 3:
-            return "Scissors";
+            return "scissors";
     }
 }
 
-function playRound(player, computer) {
-    plyr = player.toLowerCase();
-    comp = computer.toLowerCase();
+function playRound(plyr, comp) {
     console.log(plyr, comp)
     if (plyr === comp) {
         return 2;
@@ -35,31 +33,64 @@ function playRound(player, computer) {
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++){
+// function game() {
+//     for (let i = 0; i < 5; i++){
 
-        rndInt = randomIntFromInterval(1, 3);
-        let computerSelection = getComputerChoice();
-        let playerSelection = window.prompt("Enter your choice:");
+//         rndInt = randomIntFromInterval(1, 3);
+//         let computerSelection = getComputerChoice();
+//         let playerSelection = window.prompt("Enter your choice:");
 
-        round = playRound(playerSelection, computerSelection);
-        if (round === 1) {
-            playerScore += 1;
-        } else if (round === 0){
-            computerScore += 1;
-        }
+//         round = playRound(playerSelection, computerSelection);
+//         if (round === 1) {
+//             playerScore += 1;
+//         } else if (round === 0){
+//             computerScore += 1;
+//         }
 
-        console.log(playerScore, computerScore)
-    }
+//         console.log(playerScore, computerScore)
+//     }
 
-    if (playerScore > computerScore) {
-        console.log("Player wins!")
-    } else {
-        console.log("Computer wins!")
-    }
-}
+//     if (playerScore > computerScore) {
+//         console.log("Player wins!")
+//     } else {
+//         console.log("Computer wins!")
+//     }
+// }
 
+const title = document.querySelector("h1");
+const winner = document.createElement("h3");
+const result = document.createElement("p");
 let playerScore = 0;
 let computerScore = 0;
-let rndInt = undefined;
-game()
+let plS = document.getElementById("player-score");
+let compS = document.getElementById("computer-score");
+
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerSelection = button.id;
+        let rndInt = randomIntFromInterval(1, 3);
+        let computerSelection = getComputerChoice(rndInt);
+        let round = playRound(playerSelection, computerSelection);
+        if (round === 1) {
+                playerScore += 1;
+                plS = document.getElementById("player-score").innerText = playerScore;
+            } else if (round === 0){
+                computerScore += 1;
+                compS = document.getElementById("computer-score").innerText = computerScore;
+            }
+        
+        if (playerScore === 5) {
+            winner.innerText = "You win!";
+            title.appendChild(winner);
+        } else if (computerScore === 5) {
+            winner.innerText = "You lose!";
+            title.appendChild(winner);
+        }
+        
+        
+    });
+});
+
+// game()
