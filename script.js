@@ -33,33 +33,9 @@ function playRound(plyr, comp) {
     }
 }
 
-// function game() {
-//     for (let i = 0; i < 5; i++){
-
-//         rndInt = randomIntFromInterval(1, 3);
-//         let computerSelection = getComputerChoice();
-//         let playerSelection = window.prompt("Enter your choice:");
-
-//         round = playRound(playerSelection, computerSelection);
-//         if (round === 1) {
-//             playerScore += 1;
-//         } else if (round === 0){
-//             computerScore += 1;
-//         }
-
-//         console.log(playerScore, computerScore)
-//     }
-
-//     if (playerScore > computerScore) {
-//         console.log("Player wins!")
-//     } else {
-//         console.log("Computer wins!")
-//     }
-// }
-
 const title = document.querySelector("h1");
 const winner = document.createElement("h3");
-const result = document.createElement("p");
+// const result = document.createElement("p");
 let playerScore = 0;
 let computerScore = 0;
 let plS = document.getElementById("player-score");
@@ -88,8 +64,6 @@ buttons.forEach((button) => {
             winner.innerText = "You lose!";
             title.appendChild(winner);
         }
-        
-        
     });
 });
 
